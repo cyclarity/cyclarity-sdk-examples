@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "my-new-runnable"
+version = "0.1.0"
+description = ""
+authors = ["Gal Bachar <gal.bachar@cymotive.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+cyclarity-sdk = "^1.0.53"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
