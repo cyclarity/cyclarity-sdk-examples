@@ -5,10 +5,12 @@ import cyclarity_sdk.sdk_models.findings.types as PTFindingTypes
 
 
 class MyRunResult(BaseResultsModel):
+    #define out params
     res: str = ""
 
 
 class MyRunnable(Runnable[MyRunResult]):
+    #define in params 
     input_int: int = 100
 
     def setup(self):
@@ -33,3 +35,14 @@ class MyRunnable(Runnable[MyRunResult]):
                              purpose='Runnable example',
                              description='This is a PTFinding Description runnable example')
         self.platform_api.send_finding(my_finding)
+
+#Local runnable testing example
+def main():
+    input = {'input_int': 100}
+    with MyRunnable(**input) as runnable_instance:
+        result: MyRunResult = runnable_instance()
+        print(result)
+
+
+if __name__ == '__main__': 
+    main()
