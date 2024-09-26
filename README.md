@@ -1,5 +1,5 @@
-# cyclarity-sdk-usage-examples
-cyclarity-sdk-usage-examples Project description CyClarity SDK
+Project description
+CyClarity SDK
 
 Introduction
 
@@ -9,15 +9,19 @@ Installation
 
 You can install the CyClarity SDK using poetry in your poetry project:
 
+```bash
   poetry add cyclarity-sdk
+```
+
 To create a poetry project use this docs: https://python-poetry.org/docs/
 
-You can download your sdk-usage-example using cyclarity git hub example : https://github.com/cyclarity/cyclarity-sdk-usage-examples Usage
+You can download your sdk-usage-example using cyclarity git hub example : https://github.com/cyclarity/cyclarity-sdk-usage-examples
+Usage
 
-Here are examples of how to use the classes in the CyClarity SDK. Runnable The Runnable class is a base class for creating objects that can be run with setup and teardown phases. It has setup, run, and teardown methods that need to be implemented.
+Here are examples of how to use the classes in the CyClarity SDK. Runnable The Runnable class is a base class for creating objects that can be run with setup and teardown phases. It has setup, run, and teardown methods that need to be implemented. 
 
 This is the structure of a runnable:
-
+```python
 from cyclarity_sdk.runnable import Runnable, BaseResultsModel
 from cyclarity_sdk.sdk_models.findings import PTFinding
 import cyclarity_sdk.sdk_models.findings.types import FindingStatus , FindingType , AssessmentCategory
@@ -50,8 +54,11 @@ class MyRunnable(Runnable[MyResult]):
 
     def teardown(self, exception_type, exception_value, traceback):  
         self.logger.info("Tearing down")  
-PlatformApi
+```
+
+## PlatformApi
 The PlatformApi class provides methods for interacting with the CyClarity platform. It is used within a Runnable instance through the self.platform_api attribute.
+```python
 
 from cyclarity_sdk.platform_api.Iplatform_connector import IPlatformConnectorApi as IPlatformConnectorApi
 from cyclarity_sdk.sdk_models.findings import PTFinding as PTFinding
@@ -61,16 +68,17 @@ class PlatformApi:
     def send_test_report_description(self, description: str): ...
     def send_finding(self, pt_finding: PTFinding): ...
     def report_test_progress(self, percentage: int): ...
-send_test_report_description:
+
+```
+### send_test_report_description:
 description: str (expects a description)
-
-send_finding:
-Gets PTfinding object and sends it to be visible on the website (See PTFinding)
-
-report_test_progress
+### send_finding:
+Gets PTfinding object and sends it to be visible on the website (See [PTFinding](#ptfinding))
+### report_test_progress
 percentage: int (expects a percentage , example above)
 
-PTFinding
+## PTFinding
+```python
 from pydantic import BaseModel, Field, computed_field, field_validator
 from enum import Enum
 from cyclarity_sdk.sdk_models.findings.types import FindingStatus, FindingType, AssessmentCategory, AssessmentTechnique
@@ -115,3 +123,4 @@ class AssessmentTechnique(str, Enum):
     CVE_SEARCH = 'CVE search'
     OTHER_EXPLORATION = 'other exploration'
     UNKNOWN = 'unknown'
+```
